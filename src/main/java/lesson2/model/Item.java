@@ -69,4 +69,28 @@ public class Item {
                 ", description='" + description + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Item item = (Item) o;
+
+        if (id != item.id) return false;
+        if (!name.equals(item.name)) return false;
+        if (!dateCreated.equals(item.dateCreated)) return false;
+        if (!lastUpdatedDate.equals(item.lastUpdatedDate)) return false;
+        return description.equals(item.description);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + name.hashCode();
+        result = 31 * result + dateCreated.hashCode();
+        result = 31 * result + lastUpdatedDate.hashCode();
+        result = 31 * result + description.hashCode();
+        return result;
+    }
 }

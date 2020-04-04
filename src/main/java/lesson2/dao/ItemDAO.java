@@ -90,6 +90,8 @@ public class ItemDAO {
 
         } catch (HibernateException e) {
             throw new Exception(getClass().getSimpleName()+"-findByName: "+name+" failed. "+e.getMessage());
+        } catch (Exception e){
+            return null;
         }
     }
 
