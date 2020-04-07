@@ -1,4 +1,5 @@
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lesson2.HttpExсeption;
 import lesson2.model.Item;
 import lesson2.controller.ItemController;
 
@@ -26,7 +27,12 @@ public class MyServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         try {
             resp.getWriter().println("item was saved with id: "+itemController.save(new ObjectMapper().readValue(req.getInputStream(), Item.class)).getId());
-        } catch (Exception e){
+        } catch (HttpExсeption e){
+            resp.setStatus(e.getStatusCode());
+            resp.getWriter().println(e.getMessage());
+        }
+        catch (Exception e){
+            resp.setStatus(500);
             resp.getWriter().println(e.getMessage());
         }
     }

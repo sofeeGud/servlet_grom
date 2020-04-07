@@ -1,7 +1,11 @@
 package lesson2.service;
 
+import lesson2.HttpExсeption;
 import lesson2.dao.ItemDAO;
 import lesson2.model.Item;
+
+import java.net.HttpRetryException;
+
 
 public class ItemService {
 
@@ -31,8 +35,8 @@ public class ItemService {
 
     private void validateItem(Item item) throws Exception {
         if(item.getName().equals(""))
-            throw new Exception("Item name can not be empty");
+            throw new HttpExсeption(400,"Item name can not be empty");
         if(itemDAO.findByName(item.getName()) != null)
-            throw new Exception("Item with name: "+item.getName()+" already exists");
+            throw new HttpExсeption(400,"Item with name: "+item.getName()+" already exists");
     }
 }
